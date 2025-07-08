@@ -18,8 +18,14 @@ namespace Command.Commands
 
         public override void Undo()
         {
-            targetUnit.RestoreHealth(actorUnit.CurrentPower);
-            actorUnit.Owner.ResetCurrentActiveUnit();
+            if (willHitTarget)
+            {
+                if (!targetUnit.IsAlive())
+                    targetUnit.Revive();
+
+                targetUnit.RestoreHealth(actorUnit.CurrentPower);
+                actorUnit.Owner.ResetCurrentActiveUnit();
+            }
         }
     }
 }

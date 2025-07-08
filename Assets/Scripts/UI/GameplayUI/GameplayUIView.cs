@@ -9,7 +9,7 @@ namespace Command.UI
     public class GameplayUIView : MonoBehaviour, IUIView
     {
         private GameplayUIController controller;
-        [SerializeField] Button undoButton;
+        [SerializeField] private Button undoButton;
         [SerializeField] private TextMeshProUGUI turnText;
         [SerializeField] private TextMeshProUGUI missedText;
         [SerializeField] private Image Player1BackgroundOverlay;
@@ -19,7 +19,7 @@ namespace Command.UI
         [SerializeField] private Color ActionSelectionOverlayColor;
         [SerializeField] private Image backgroundImage;
 
-        public void SetController(GameplayUIController controllerToSet) 
+        public void SetController(GameplayUIController controllerToSet)
         {
             controller = controllerToSet;
             undoButton.onClick.AddListener(controller.OnUndoButtonClicked);
@@ -34,7 +34,7 @@ namespace Command.UI
 
         public void ShowPlayerOverlay(int targetPlayer, OverlayColorType overlayColorType)
         {
-            switch(targetPlayer)
+            switch (targetPlayer)
             {
                 case 1:
                     Player1BackgroundOverlay.enabled = true;
@@ -64,7 +64,7 @@ namespace Command.UI
 
         public void SetOverlayColor(Image overlayImage, OverlayColorType colorType)
         {
-            switch(colorType)
+            switch (colorType)
             {
                 case OverlayColorType.Friendly:
                     overlayImage.color = FriendlyOverlayColor;
@@ -84,7 +84,7 @@ namespace Command.UI
         {
             backgroundImage.gameObject.SetActive(true);
             backgroundImage.sprite = bgSprite;
-        } 
+        }
     }
 
     [Serializable]
