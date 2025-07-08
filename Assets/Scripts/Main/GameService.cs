@@ -1,14 +1,14 @@
 using UnityEngine;
+using System.Collections.Generic;
 using Command.Utilities;
 using Command.Sound;
-using System.Collections.Generic;
 using Command.Input;
 using Command.Player;
 using Command.UI;
 using Command.Events;
 using Command.Battle;
 using Command.Actions;
-using UnityEngine.UI;
+using Command.Commands;
 
 namespace Command.Main
 {
@@ -28,6 +28,7 @@ namespace Command.Main
         public InputService InputService { get; private set; }
         public BattleService BattleService { get; private set; }
         public PlayerService PlayerService { get; private set; }
+        public CommandInvoker CommandInvoker { get; private set; }
 
         [SerializeField] private UIService uiService;
         public UIService UIService => uiService;
@@ -49,8 +50,11 @@ namespace Command.Main
             BattleService = new BattleService(battleScriptableObjects);
             PlayerService = new PlayerService();
             uiService.Init(battleScriptableObjects.Count);
+            CommandInvoker = new CommandInvoker();
         }
 
         private void Update() => InputService.UpdateInputService();
+
+        public void ProcessUnitCommand(ICommand commandToProcess) => PlayerService.ProcessUnitCommand(commandToProcess as UnitCommand);
     }
 }
